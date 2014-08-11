@@ -36,9 +36,9 @@ proc pub:cmd {nick uhost handle chan text} {
         }
       }
       "load" {
-        if {[catch {rehash} output]} {
+        if {[catch {source [lrange $text 2 end]} output]} {
           notice $nick "An error occurred:"
-          foreach line [split $ouptput \r\n] {
+          foreach line [split $output \r\n] {
             notice $nick $line
           }
         } else {
@@ -49,17 +49,18 @@ proc pub:cmd {nick uhost handle chan text} {
         putquick [lrange $text 2 end]
         notice $nick "Put to server: [lrange $text 2 end]"
       }
-     "project" {
-       switch [string tolower [lindex $text 2]] {
-         "add" {
-           # project add <type> <folder> <description>
-         }
-         "list" {
-           # project list <wildcard>
-         }
-         "del" {
-           # project del <id>
-         }
+      "project" {
+        switch [string tolower [lindex $text 2]] {
+          "add" {
+            # project add <type> <folder> <description>
+          }
+          "list" {
+            # project list <wildcard>
+          }
+          "del" {
+            # project del <id>
+          }
+        }
       }
       default {
         catch {eval [lrange $text 1 end]} output
