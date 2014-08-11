@@ -17,6 +17,7 @@ proc pub:cmd {nick uhost handle chan text} {
         }
       }
       "status" {
+        notice $nick ".. a status?"
       }
       "load" {
         if {[catch {rehash} output]} {
