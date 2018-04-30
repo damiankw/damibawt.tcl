@@ -4,7 +4,7 @@ proc pub:cmd {nick uhost handle chan text} {
   # <botnick>, <command> <args>
   # bots, <command> <args>
   global botnick
-  if {([string tolower [lindex $text 0]] == "bots,") || ([string tolower [lindex $text 0]] == "$botnick,")} {
+  if {([string tolower [lindex $text 0]] == "bots,") || ([string tolower [lindex $text 0]] == [string tolower "$botnick,"])} {
     switch [lindex $text 1] {
       "rehash" {
         if {[catch {rehash} output]} {
