@@ -8,41 +8,41 @@ proc pub:cmd {nick uhost handle chan text} {
     switch [lindex $text 1] {
       "rehash" {
         if {[catch {rehash} output]} {
-          notice $nick "An error occurred while rehashing:"
+          bnotice $nick "An error occurred while rehashing:"
           foreach line [split $ouptput \r\n] {
-            notice $nick $line
+            bnotice $nick $line
           }
         } else {
-          notice $nick "Successfully rehashed."
+          bnotice $nick "Successfully rehashed."
         }
       }
       "status" {
       }
       "load" {
         if {[catch {rehash} output]} {
-          notice $nick "An error occurred while rehashing:"
+          bnotice $nick "An error occurred while rehashing:"
           foreach line [split $ouptput \r\n] {
-            notice $nick $line
+            bnotice $nick $line
           }
         } else {
-          notice $nick "Successfully rehashed."
+          bnotice $nick "Successfully rehashed."
         }
       }
       "raw" {
         putquick [lrange $text 2 end]
-        notice $nick "Put to server: [lrange $text 2 end]"
+        bnotice $nick "Put to server: [lrange $text 2 end]"
       }
       default {
         catch {eval [lrange $text 1 end]} output
         foreach line [split $output \r\n] {
-          notice $nick "Tcl: $line"
+          bnotice $nick "Tcl: $line"
         }
-        notice $nick "End."
+        bnotice $nick "End."
       }
     }
   }
 }
 
-proc notice {nick text} {
+proc bnotice {nick text} {
   puthelp "NOTICE $nick :$text"
 }
