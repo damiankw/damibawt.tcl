@@ -46,3 +46,5 @@ proc pub:cmd {nick uhost handle chan text} {
 proc bnotice {nick text} {
   puthelp "NOTICE $nick :$text"
 }
+
+putlog "% Loaded damibawt.tcl"
